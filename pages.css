@@ -1,0 +1,262 @@
+/* =============================================
+   SCDIS — Page-specific styles
+   ============================================= */
+
+/* ---- DASHBOARD ---- */
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Live pulse indicator */
+.live-pulse {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; color: var(--acc);
+}
+.live-ring {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--acc);
+  position: relative;
+}
+.live-ring::after {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--acc);
+  animation: pulse-ring 1.8s ease infinite;
+  opacity: 0;
+}
+@keyframes pulse-ring {
+  0%   { opacity: .6; transform: scale(.8); }
+  100% { opacity: 0;  transform: scale(1.6); }
+}
+
+/* Throughput mini bar chart */
+.mini-chart {
+  display: flex; align-items: flex-end; gap: 3px;
+  height: 44px; margin-top: 10px;
+}
+.mc-bar {
+  flex: 1; border-radius: 2px 2px 0 0;
+  min-width: 4px;
+  transition: opacity .15s;
+}
+.mc-bar:hover { opacity: .8; }
+
+/* Source connection visualization */
+.connection-line {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.conn-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.conn-line {
+  flex: 1; height: 1px; background: var(--border);
+  position: relative; overflow: visible;
+}
+.conn-line.animated::after {
+  content: '';
+  position: absolute; top: -1px; left: 0;
+  width: 12px; height: 3px;
+  background: var(--acc);
+  border-radius: 2px;
+  animation: flow 2s linear infinite;
+}
+@keyframes flow {
+  from { left: -12px; }
+  to   { left: 100%; }
+}
+
+/* ---- ANALYTICS ---- */
+.analytics-chart-area {
+  height: 220px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.chart-y-labels {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  font-size: 9px; color: var(--text-faint);
+  padding: 2px 0;
+  width: 36px;
+}
+.chart-area {
+  position: absolute; left: 40px; right: 0; top: 0; bottom: 0;
+}
+.chart-gridlines {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  pointer-events: none;
+}
+.gridline {
+  border-top: 0.5px solid var(--border);
+  width: 100%;
+}
+
+/* ---- FIELD MAPPING ---- */
+.mapping-schema-box {
+  background: var(--bg);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  font-size: 10px;
+}
+.schema-label {
+  font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 8px;
+}
+.schema-field {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 0;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 10px;
+}
+.schema-field:last-child { border-bottom: none; }
+.sf-type {
+  font-size: 9px; padding: 1px 5px;
+  border-radius: var(--r-sm);
+  background: var(--info-bg); color: var(--info-text);
+  margin-left: auto;
+}
+.sf-type.str  { background: var(--success-bg); color: var(--success-text); }
+.sf-type.date { background: var(--warn-bg);    color: var(--warn-text); }
+.sf-type.int  { background: #ede9fe;           color: #5b21b6; }
+
+/* ---- PIPELINE PROGRESS ---- */
+.progress-track {
+  height: 4px; border-radius: 2px;
+  background: var(--bg);
+  margin-top: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 2px;
+  background: var(--acc);
+  transition: width 1s ease;
+}
+.progress-fill.error { background: var(--danger); }
+.progress-fill.warn  { background: var(--warn); }
+
+.pip-error-box {
+  background: var(--danger-bg);
+  border-radius: var(--r-sm);
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-size: 10px;
+  color: var(--danger-text);
+  font-family: var(--font-mono);
+  line-height: 1.6;
+}
+
+.pip-metrics {
+  display: flex; gap: 12px; margin-top: 10px;
+  padding-top: 10px;
+  border-top: 0.5px solid var(--bg);
+}
+.pip-metric { flex: 1; }
+.pip-metric-val { font-family: var(--font-serif); font-size: 18px; font-weight: 300; }
+.pip-metric-lbl { font-size: 9px; color: var(--text-muted); letter-spacing: .5px; }
+
+/* ---- AUDIT ---- */
+.audit-filter-row {
+  display: flex; gap: 8px; align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.audit-timeline {
+  border-left: 1.5px solid var(--border);
+  margin-left: 6px;
+  padding-left: 16px;
+}
+.audit-entry {
+  position: relative;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--bg);
+}
+.audit-entry:last-child { border-bottom: none; }
+.audit-entry::before {
+  content: '';
+  position: absolute;
+  left: -22px; top: 14px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border-md);
+  border: 2px solid var(--card);
+}
+.audit-entry.ae-success::before { background: var(--success); }
+.audit-entry.ae-error::before   { background: var(--danger); }
+.audit-entry.ae-warn::before    { background: var(--warn); }
+.audit-entry.ae-info::before    { background: var(--info); }
+
+.audit-ts { font-size: 10px; color: var(--text-faint); margin-bottom: 2px; }
+.audit-event { font-size: 11px; color: var(--text); }
+.audit-meta { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+/* ---- PATIENT MODAL DETAIL ---- */
+.patient-detail-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.patient-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--info-bg), var(--acc-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 18px; font-weight: 300;
+  color: var(--info-text);
+  flex-shrink: 0;
+}
+.patient-name { font-family: var(--font-serif); font-size: 18px; font-weight: 300; }
+.patient-id   { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+.detail-section { margin-bottom: 16px; }
+.detail-section-title {
+  font-size: 10px; letter-spacing: .8px; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 8px;
+  padding-bottom: 4px; border-bottom: 0.5px solid var(--border);
+}
+
+/* ---- LOADING SPINNER ---- */
+.spinner {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--acc);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+/* ---- EMPTY STATE ---- */
+.empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 20px;
+  text-align: center;
+}
+.empty-icon {
+  width: 48px; height: 48px;
+  background: var(--bg);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+  color: var(--text-faint);
+}
+.empty-title { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+.empty-sub   { font-size: 11px; color: var(--text-faint); margin-top: 4px; }
+
+/* ---- INTEGRATION SCORE WIDGET ---- */
+.score-ring-wrap {
+  display: flex; align-items: center; gap: 20px; padding: 4px 0;
+}
+.score-legend { flex: 1; }
+.score-legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.legend-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.score-legend-val { margin-left: auto; font-weight: 500; color: var(--text); }

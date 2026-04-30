@@ -1,0 +1,186 @@
+/* =============================================
+   SCDIS — Base Styles, Variables, Typography
+   ============================================= */
+
+:root {
+  /* Brand palette */
+  --navy-950: #060d14;
+  --navy-900: #0a1824;
+  --navy-800: #0f2b3d;
+  --navy-700: #163a52;
+  --navy-600: #1a4a6b;
+  --navy-500: #2d6a9a;
+  --navy-400: #3d8ec4;
+  --navy-300: #5fb3e0;
+  --navy-200: #9ed2ee;
+  --navy-100: #d5edf8;
+  --navy-50:  #edf6fc;
+
+  /* Accent — teal/green */
+  --acc:       #00d4a1;
+  --acc-dark:  #00a880;
+  --acc-light: #e0faf4;
+
+  /* Semantic */
+  --success:      #10b981;
+  --success-bg:   #d1fae5;
+  --success-text: #065f46;
+  --warn:         #f59e0b;
+  --warn-bg:      #fef3c7;
+  --warn-text:    #92400e;
+  --danger:       #ef4444;
+  --danger-bg:    #fee2e2;
+  --danger-text:  #991b1b;
+  --info:         #3b82f6;
+  --info-bg:      #dbeafe;
+  --info-text:    #1e40af;
+
+  /* Surfaces */
+  --bg:         #f0f4f8;
+  --card:       #ffffff;
+  --card-hover: #f8fafc;
+  --border:     #d1dce8;
+  --border-md:  #b8cad8;
+
+  /* Text */
+  --text:       #0f2b3d;
+  --text-muted: #5a7a94;
+  --text-faint: #9ab0c0;
+
+  /* Typography */
+  --font-mono:  'DM Mono', 'Courier New', monospace;
+  --font-serif: 'Fraunces', Georgia, serif;
+
+  /* Radii */
+  --r-sm: 5px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.08);
+
+  /* Sidebar */
+  --sidebar-bg: #0a1824;
+  --sidebar-w:  230px;
+  --topbar-h:   58px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 14px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-mono);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; cursor: pointer; }
+
+button {
+  font-family: var(--font-mono);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* Typography Scale */
+.t-display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+.t-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+}
+
+/* Status dots */
+.status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot-green  { background: var(--success); }
+.dot-amber  { background: var(--warn); box-shadow: 0 0 0 2px var(--warn-bg); }
+.dot-red    { background: var(--danger); box-shadow: 0 0 0 2px var(--danger-bg); }
+.dot-blue   { background: var(--info); }
+.dot-gray   { background: var(--text-faint); }
+
+/* Tags / badges */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: var(--r-sm);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+.tag-blue   { background: var(--info-bg);    color: var(--info-text); }
+.tag-green  { background: var(--success-bg); color: var(--success-text); }
+.tag-amber  { background: var(--warn-bg);    color: var(--warn-text); }
+.tag-red    { background: var(--danger-bg);  color: var(--danger-text); }
+.tag-gray   { background: #f0f4f8;           color: var(--text-muted); }
+
+/* Pill badges */
+.pill {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--navy-700);
+  color: var(--navy-200);
+  letter-spacing: 0.4px;
+}
+.pill-live {
+  background: rgba(0, 212, 161, 0.15);
+  color: var(--acc);
+  animation: pulse-live 2s infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-md); }
+
+/* Focus */
+*:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.fade-up { animation: fadeUp 0.3s ease both; }
